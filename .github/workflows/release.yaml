@@ -8,8 +8,13 @@ on:
 env:
   DOCKER_IMAGE: ohdsi/webapi
 
+permissions:
+  contents: read
+
 jobs:
   upload:
+    permissions:
+      contents: write
     env:
       MAVEN_PROFILE: webapi-postgresql
 
