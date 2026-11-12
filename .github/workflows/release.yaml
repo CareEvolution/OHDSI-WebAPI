@@ -45,10 +45,10 @@ jobs:
 
       # Upload it to GitHub
       - name: Upload to GitHub
-        uses: AButler/upload-release-assets@v2.0
-        with:
-          files: 'target/WebAPI.war'
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.event.release.tag_name }}
+        run: gh release upload "$TAG" target/WebAPI.war --clobber
 
   # Build and push tagged release docker image to
   # ohdsi/atlas:<version> and ohdsi/atlas:latest.
